@@ -1,0 +1,67 @@
+= CloudBees action: Run a Bitbucket pipeline
+
+Use this action to trigger a Bitbucket pipeline. Atlassian Bitbucket Pipelines is a CI/CD tool.
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required?
+| Description
+
+| `url`
+| String
+| Yes
+| The Bitbucket URL.
+
+| `token`
+| String
+| Yes
+| The Bitbucket token.
+
+| `workspace-name`
+| String
+| Yes
+| The Bitbucket workspace name.
+
+| `repository-name`
+| String
+| Yes
+| The Bitbucket repository name.
+
+| `branch-name`
+| String
+| Yes
+| The Bitbucket branch name.
+
+|===
+
+== Usage example
+
+In your YAML file, add:
+
+[source,yaml]
+----
+      - name: Run Bitbucket pipeline
+        uses: cloudbees.io/bitbucket-run-pipeline@v1
+        with:
+          url: ${{ vars.BITBUCKET_URL }}
+          token: ${{ secrets.BITBUCKET_TOKEN }}
+          workspace-name: my_workspace
+          repository-name: my_repo
+          branch-name: main
+----
+
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].

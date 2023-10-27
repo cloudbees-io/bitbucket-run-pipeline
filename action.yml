@@ -1,0 +1,46 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: bitbucket pipeline actions
+inputs:
+  url:  # id of input
+    description: 'bitbucket action url'
+    required: false
+    default: 'https://api.bitbucket.org/2.0/repositories'
+  token:  # id of input
+    description: 'bitbucket token'
+    required: true
+    default: ''    
+  workspace-name:  # id of input
+    description: 'workspace name'
+    required: true
+    default: ''
+  repository-name:  # id of input
+    description: 'repository name'
+    required: true
+    default: '' 
+  branch-name:  # id of input
+    description: 'branch name'
+    required: true
+    default: ''     
+  
+      
+runs:
+  using: composite
+  steps:
+    - id: invoke-bitbucket-pipeline-job
+      name: invoke-bitbucket-pipeline-job
+      uses: docker://registry.saas-dev.beescloud.com/staging/bitbucket-actions:main-36a68e4da2ea5e91af7d8879e6595a82d47a9850
+      shell: sh
+      env:
+        CONFIG_JSON: '{"metaInfo":{"url":"${{ inputs.url }}","toolType":"BITBUCKET_PIPELINE","token":"${{ inputs.token }}","workspaceName":"${{ inputs.workspace-name }}","repositoryName":"${{ inputs.repository-name }}","branchName":"${{ inputs.branch-name }}"}}'
+        RUN_ID: ${{ cloudbees.run_id }}
+        JOB_ID: ${{ job.id }}
+        STEP_ID: ${{ step.internal.id }}
+        DNS_URL: ${{ cloudbees.api.url }}
+        JWT_TOKEN: ${{ cloudbees.api.token }}
+      run: |
+        set -x
+        cd /app
+        ./bitbucket_pipeline_actions_app invoke -i $CONFIG_JSON
+        
+        
