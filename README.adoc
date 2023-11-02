@@ -47,7 +47,7 @@ In your YAML file, add:
 [source,yaml]
 ----
       - name: Run Bitbucket pipeline
-        uses: cloudbees.io/bitbucket-run-pipeline@v1
+        uses: cloudbees-io/bitbucket-run-pipeline@v1
         with:
           url: ${{ vars.BITBUCKET_URL }}
           token: ${{ secrets.BITBUCKET_TOKEN }}
