@@ -29,7 +29,7 @@ runs:
   steps:
     - id: invoke-bitbucket-pipeline-job
       name: invoke-bitbucket-pipeline-job
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/bitbucket-actions:main-bcd554d23571baa1a268a3dd99c3a493572c59cc
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/bitbucket-actions:main-d88ac0768f1c7b01b245d7fbbdf8d13ce843f9c0
       shell: sh
       env:
         CONFIG_JSON: '{"metaInfo":{"url":"${{ inputs.url }}","toolType":"BITBUCKET_PIPELINE","token":"${{ inputs.token }}","workspaceName":"${{ inputs.workspace-name }}","repositoryName":"${{ inputs.repository-name }}","branchName":"${{ inputs.branch-name }}"}}'
